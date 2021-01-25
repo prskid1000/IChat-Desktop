@@ -1,16 +1,18 @@
+from logging import disable
+import requests
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.config import Config
 from kivy.core.text import Label
-from kivy.uix.floatlayout import FloatLayout
+from kivy.graphics import Color, Rectangle
 from kivy.uix.button import Button
-from kivy.uix.widget import Widget
-from kivy.uix.textinput import TextInput
-from kivy.uix.label import Label
-from kivy.graphics import Rectangle, Color
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
-import requests
+from kivy.uix.textinput import TextInput
+from kivy.uix.widget import Widget
 
 #Global variables acting as cookies
 screenx = float(Config.get('graphics', 'width'))
@@ -127,19 +129,36 @@ def Delete():
 
 def Mail(author, message):
 
-    button = Button()
-    button.size_hint = (None, None)
-    button.text =  message
+    mail = BoxLayout(orientation='horizontal')
+    mail.size_hint = (1, None)
+
+    label = Button(disabled=True)
+    mess = Button(disabled=True)
+
+    label.text =  author
+    mess.text =  message
+
+    mess.color = (0,0,0, 1)
+    mess.background_color = (255,255,255, 255)
+
+    mess.size_hint = (6, 1)
+    label.size_hint = (1, 1)
 
     if(author == userid[0]):
-        button.background_color = (1,1,255, 1)
-        button.halign = 'left'
+        label.background_color = (1,1,255, 1)
     else:
-        button.background_color = (255,1,1, 1)
-        button.halign = 'right'
+        label.background_color = (255,1,1, 1)  
 
-    button.size = (470, 40)
-    return button
+
+    if(author == userid[0]):
+        mail.add_widget(label)
+        mail.add_widget(mess)
+    else:
+        mail.add_widget(mess)
+        mail.add_widget(label)
+
+
+    return mail
 
 def scrollgridChat(Screen,components,pos, size):
     grid = GridLayout(cols=1, size_hint_y=None)
@@ -191,14 +210,12 @@ def Chat():
 
     Chat.add_widget(button(570, 130, "Delete", Delete))
     Chat.add_widget(button(680, 130, "GO Back", Login))
-    Chat.add_widget(button(620, 60, "Refresh", Refresh))
 
     if(type(res['data']) != str):
         res['data']['chat'].reverse()
         Chat.add_widget(scrollgridChat(Chat, res['data']['chat'], pos=(60,60), size=(480, 340)))
 
-
-    Clock.schedule_interval(Refresh, 10)
+    Clock.schedule_once(Refresh, 10)
 
     return Chat
 
@@ -238,9 +255,9 @@ def Card(text):
     card = Button()
     card.size_hint = (None, None)
     card.text = text
-    card.font_size = "20sp"
+    card.font_size = "24sp"
     card.size = (480, 100)
-    card.background_color = (255, 255, 255, 0.4)
+    card.background_color = (255, 1, 1, 1)
     card.bind(on_press = function) 
     return card
 
@@ -294,7 +311,7 @@ def Index():
     
     Index.add_widget(scrollgrid(Index, set, pos=(60, 60), size=(480, 340)))
     
-    Clock.schedule_once(Reload, 10)
+    Clock.schedule_once(Reload, 20)
 
     return Index
 
@@ -303,18 +320,26 @@ def Login():
     res = requests.post(url = "https://ichatb.herokuapp.com/isauth",data=data).json()
     if(res['success'] == "True"):
         boxids[0] = res['data']['boxid']
+        root.clear_widgets()
+        root.add_widget(Index())
+    else:
+        root.clear_widgets()
+        root.add_widget(Account())
     Clock.unschedule(Refresh)
-    root.clear_widgets()
-    root.add_widget(Index())
 
 def Register():
     data = {'userid':userid[0], 'password': password[0]}
     res = requests.post(url = "https://ichatb.herokuapp.com/adduser",data=data).json()
     if(res['success'] == "True"):
         boxids[0] = res['data']['boxid']
+    if(res['success'] == "True"):
+        boxids[0] = res['data']['boxid']
+        root.clear_widgets()
+        root.add_widget(Index())
+    else:
+        root.clear_widgets()
+        root.add_widget(Account())
     Clock.unschedule(Refresh)
-    root.clear_widgets()
-    root.add_widget(Index())
     
 def Account():
     Account = Widget()
