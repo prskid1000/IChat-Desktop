@@ -174,12 +174,10 @@ def scrollgridChat(Screen,components,pos, size):
 
 
 def Refresh(dt):
-    print("Refresh")
     root.clear_widgets()
     root.add_widget(Chat())
 
 def Reload(dt):
-    print("Reload")
     root.clear_widgets()
     root.add_widget(Index())
 
