@@ -7,7 +7,6 @@ It is python version of Ichat Messenger App
 
 ![3](https://github.com/prskid1000/IChat-Desktop/blob/main/Preview/3.png?raw=true)
 
-![4](https://github.com/prskid1000/IChat-Desktop/blob/main/Preview/4.png?raw=true)
 
 ## DockerHub Link:
 https://hub.docker.com/repository/docker/prskid1000/ichat
