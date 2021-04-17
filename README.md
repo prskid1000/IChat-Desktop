@@ -7,15 +7,10 @@ It is python version of Ichat Messenger App
 
 ![3](https://github.com/prskid1000/IChat-Desktop/blob/master/Preview/3.png?raw=true)
 
-
-## DockerHub Link:
-https://hub.docker.com/repository/docker/prskid1000/ichat
-
 ## You may need to pip-install few dependencies-<br>
-### 1)tkinter<br>
-### 2)requests<br>
-### 3)urllib<br>
-## Then simply run the App.py file.
+- kivy<br>
+- requests<br>
+### Then simply run the IChat-Desktop.py file.
 
 ## Status
 Repository status([badge](https://img.shields.io/badge/)):
