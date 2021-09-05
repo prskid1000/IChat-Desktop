@@ -1,7 +1,7 @@
 # Ichat-Desktop
 It is python version of Ichat Messenger App
 
-## 2021(Flutter)-<br>
+## 2021(Flutter)<br>
 ![1](https://github.com/prskid1000/IChat-Desktop/blob/master/Preview21/1.png?raw=true)
 
 ![2](https://github.com/prskid1000/IChat-Desktop/blob/master/Preview21/2.png?raw=true)
@@ -19,7 +19,7 @@ It is python version of Ichat Messenger App
 ![1](https://github.com/prskid1000/IChat-Desktop/blob/master/Preview21/8.png?raw=true)
 
 
-## 2020(Kivy)-<br>
+## 2020(Kivy)<br>
 ![1](https://github.com/prskid1000/IChat-Desktop/blob/master/Preview20/1.png?raw=true)
 
 ![2](https://github.com/prskid1000/IChat-Desktop/blob/master/Preview20/2.png?raw=true)
